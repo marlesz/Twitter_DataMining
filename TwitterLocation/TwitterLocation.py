@@ -164,11 +164,11 @@ class TwitterLocation:
                 dataMatrix2 = []
                 dataMatrix = numpy.array(dataMatrix)
                 for i in dataMatrix:
-                    if not (i[0]>47.75 and i[1]>-122.25 or i[0]<47.50 and i[1]>-122.25 or i[0]>47.75 and i[1]<-122.40 or i[0]<47.50 and i[1]<-122.40):
+                    if (i[0]<47.7592 and i[0]>47.4792 and i[1]<-122.2421 and i[1]>-122.4440):
                         dataMatrix2.append(i)
                 #print dataMatrix
                 file.close()
-                distanceMatrix = dist.pdist(dataMatrix, 'euclidean')
+                distanceMatrix = dist.pdist(dataMatrix2, 'euclidean')
 
                 global linkageMatrix
                 #Metoda centroidów
@@ -201,10 +201,10 @@ class TwitterLocation:
             def pushButtonClicked2(self):
                 global clust
                 #Kryterium: distance
-                if self.comboBox.currentIndex() == 0:
+                if self.comboBox2.currentIndex() == 0:
                     clust = hier.fcluster(linkageMatrix, self.lineEdit_2.text() , criterion = 'distance')
                 #Kryterium: niespojnosc
-                elif self.comboBox.currentIndex() == 1:
+                elif self.comboBox2.currentIndex() == 1:
                     clust = hier.fcluster(linkageMatrix, self.lineEdit_2.text() , criterion = 'inconsistent')
 
                 result = []
